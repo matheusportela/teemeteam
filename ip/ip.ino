@@ -174,21 +174,14 @@ int streq(char str1[], char str2[]) {
   return (strcmp(str1, str2) == 0);
 }
 
-int calculate(int numbers[], int num_size) {
-  int min_number = 0;
-  int first_iteration = 1;
-  
-  for (int i = 0; i < num_size; i++) {
-    if (first_iteration) {
-      min_number = numbers[i];
-      first_iteration = 0;
-    } else {
-      if (numbers[i] < min_number)
-        min_number = numbers[i];
-    }
-  }
-    
-  return min_number;
+int calculate(vector<int> numbers, char cmd[]) {
+  if (streq(cmd, "MIN"))
+    return calcMin(numbers);
+  else if (streq(cmd, "MAX"))
+    return calcMax(numbers);
+
+  Serial.print("Unknown command: ");
+  Serial.println(cmd);
 }
 
 void loop() {
@@ -213,7 +206,7 @@ void loop() {
     sendMessage(galileo1, "RUNNING", (char*)arrayStr.c_str());
     arrayStr = cvtToString(dividedNumbers[2]);
     sendMessage(galileo2, "RUNNING", (char*)arrayStr.c_str());
-    result = calcMin(dividedNumbers[0]);
+    result = calculate(dividedNumbers[0], parser.command);
 //    result1 = calcMin(dividedNumbers[1]);
 //    result2 = calcMin(dividedNumbers[2]);
     receiveMessage(message, MESSAGE_MAX_SIZE);
@@ -224,11 +217,11 @@ void loop() {
     results.push_back(result);
     results.push_back(parser1.numbers[0]);
     results.push_back(parser2.numbers[0]);
-    result = calcMin(results);
+    result = calculate(results, parser.command);
     sprintf(message, "%d", result);
     sendMessage(remoteIp, "RESULT", message);
   } else if (streq(parser.stat, "RUNNING")) {
-    result = calcMin(parser.numbers);
+    result = calculate(parser.numbers, parser.command);
     sprintf(message, "%d", result);
     delay((parser.ip[3] - 200)*500);
     sendMessage(remoteIp, "RESULT", message);
