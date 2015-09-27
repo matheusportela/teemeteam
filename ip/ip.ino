@@ -217,8 +217,8 @@ void loop() {
 //    result1 = calcMin(dividedNumbers[1]);
 //    result2 = calcMin(dividedNumbers[2]);
     receiveMessage(message, MESSAGE_MAX_SIZE);
-    receiveMessage(message, MESSAGE_MAX_SIZE);
     parser1.parse(std::string(message));
+    receiveMessage(message, MESSAGE_MAX_SIZE);
     parser2.parse(std::string(message));
     std:vector<int> results;
     results.push_back(result);
