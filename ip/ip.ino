@@ -230,6 +230,7 @@ void loop() {
   } else if (streq(parser.stat, "RUNNING")) {
     result = calcMin(parser.numbers);
     sprintf(message, "%d", result);
+    delay((parser.ip[3] - 200)*500);
     sendMessage(remoteIp, "RESULT", message);
   }
 
