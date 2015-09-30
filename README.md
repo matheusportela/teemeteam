@@ -1,5 +1,5 @@
-# teemeteam
-Código desenvolvido durante o hackathon Se Vira II, realizado na Universidade de Brasília.
+# Teeme team - Computação distribuída
+Código desenvolvido durante o hackathon Se Vira II, realizado na Universidade de Brasília do dia 27 de setembro de 2015, das 10h às 19h.
 
 O código implementa um algoritmo distribuído de cálculo de mínimos e máximos utilizando 3 Intel Galileo, os quais se comunicam pela rede utilizando cabos Ethernet.
 
